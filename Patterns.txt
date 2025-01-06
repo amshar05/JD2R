@@ -1,0 +1,76 @@
+\bexperience in\s[\w\s,]+
+(?<=\bknowledge of\s)[\w\s,]+
+\bproficient in\s[\w\s,]+
+\bability to\s[\w\s,]+
+\bfamiliar with\s[\w\s,]+
+(?<=\bhands-on experience with\s)[\w\s,]+
+\bworking knowledge of\s[\w\s,]+
+\bexpertise in\s[\w\s,]+
+\bunderstanding of\s[\w\s,]+
+\bskilled in\s[\w\s,]+
+\bresponsible for\s[\w\s,]+
+\bparticipate in\s[\w\s,]+
+\binvolvement in\s[\w\s,]+
+\blea(?:d|ds)\s[\w\s,]+
+\bmanag(?:e|ing|es)\s[\w\s,]+
+\boversee\s[\w\s,]+
+\bcoordinate\s[\w\s,]+
+\bdevelop and maintain\s[\w\s,]+
+\bassist with\s[\w\s,]+
+\bprovid(?:e|ing|es)\s[\w\s,]+
+\bsupport\s[\w\s,]+
+\bensure\s[\w\s,]+
+\bmentor\s[\w\s,]+
+\bguide\s[\w\s,]+
+\bconduct\s[\w\s,]+
+\bperfor(?:ms|ming|m)\s[\w\s,]+
+\bBachelor's Degree in\s[\w\s,]+
+\bMaster's Degree in\s[\w\s,]+
+\bPh\.?D\.? in\s[\w\s,]+
+\bCertified\s[\w\s,]+
+\bcertification in\s[\w\s,]+
+\bqualified in\s[\w\s,]+
+\bproblem-solving skills
+\battention to detail
+(?<=\bexcellent communication\s)[\w\s,]+
+\bteam player
+\bself-motivated
+(?<=\bstrong organizational\s)[\w\s,]+
+\bability to work under pressure
+\bability to multitask
+\bcritical thinking
+(?<=\bstrong analytical\s)[\w\s,]+
+\bfinancial services
+\bbanking operations
+\bcommercial banking
+\bretail banking
+\bwealth management
+\bcorporate payments
+\bdigital transformation
+\bagile environments
+\bISO\s[\w\s,]+
+\bproject management
+\bprogram management
+\bportfolio management
+\bexperience with\s[\w\s,]+
+\bfamiliarity with\s[\w\s,]+
+(?<=\bknowledge of\s)[\w\s,]+
+\bproficiency in\s[\w\s,]+
+\bexpertise in\s[\w\s,]+
+\bexposure to\s[\w\s,]+
+\bunderstanding of\s[\w\s,]+
+(\bas follows\s)[\w\s,]+
+(?<=\bsuch as\s)[\w\s,]+
+(?<=\bcertifications\s)[\w\s,]+
+\bmonitor\s[\w\s,]+
+\bmonitoring\s[\w\s,]+
+\bcommunicat(?:e|ing|es|ions)\s[\w\s,]+
+\bserving\s[\w\s,]+
+\bensur(?:e|ing|es)\s[\w\s,]+
+\bserv(?:e|ing|es)\s[\w\s,]+
+\bprioritiz(?:e|ing|es)\s[\w\s,]+
+\bupdat(?:e|ing|es)\s[\w\s,]+
+\ballocat(?:e|ing|es)\s[\w\s,]+
+\bwor(?:k|king|ks) closely\s[\w\s,]+
+\bconduc(?:t|ting|ts) closely\s[\w\s,]+
+\bevaluat(?:e|ing|es) closely\s[\w\s,]+
