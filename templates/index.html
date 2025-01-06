@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jd2Resume</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .input {
+            padding-top: 10px; /* Adjust this value to move the content down */
+        }
+
+        .logo {
+            margin: 10px 0 20px 0; /* Reduce the top margin */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #555;
+            display: block;
+            text-align: left;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        input[type="file"], select {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #45a049;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            transform: translateY(2px);
+        }
+
+        .counter {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .counter h2 {
+            font-size: 2em;
+            color: #333;
+        }
+
+        .count_text h3 {
+            color: #555;
+            font-weight: normal;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 15px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            input[type="file"], select, button {
+                max-width: 100%;
+            }
+
+            label {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 2em;
+            }
+
+            .counter h2 {
+                font-size: 1.5em;
+            }
+
+            .count_text h3 {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="input">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo-no-background.svg') }}" alt="Jd2Resume Logo" style="max-width: 100%; height: auto;">
+        </div>
+        <form action="{{ url_for('newresult') }}" method="POST" enctype="multipart/form-data">
+            <label for="jd">Select a Job Description:</label>
+            <input type="file" id="jd" name="jd" accept=".doc,.docx"><br>
+            <label for="resume">Select Resume:</label>
+            <input type="file" id="resume" name="resume" accept=".doc,.docx,.pdf" multiple><br>
+            <label for="role_type">Choose a skill bucket:</label>
+            <select id="role_type" name="role_type">
+                <option value="BA" selected>BA</option>
+                <option value="PM">PM</option>
+                <option value="SM">SM</option>
+                <option value="General">General</option>
+            </select><br>
+            <button id="submit-search" type="submit" value="submit">Compare</button>
+        </form>
+    </div>
+    <div class="counter">
+        <h2><div id="value">0</div></h2>
+        <div class="count_text">
+            <h3>resumes analyzed and still counting ...</h3>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+function animateValue(id, start, end, duration) {
+    var initial_count = '{{ initial_count }}';
+    var obj = document.getElementById(id);
+    var range = end - start;
+    var minTimer = 50;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    stepTime = Math.max(stepTime, minTimer);
+    var startTime = new Date().getTime();
+    var endTime = startTime + duration;
+    var timer;
+
+    function run() {
+        var now = new Date().getTime();
+        var remaining = Math.max((endTime - now) / duration, 0);
+        var value = Math.round(end - (remaining * range));
+        obj.innerHTML = value;
+        if (value === end) {
+            clearInterval(timer);
+        }
+    }
+
+    timer = setInterval(run, stepTime);
+    run();
+}
+
+animateValue("value", 0, '{{ initial_count }}', 1000);
+</script>
+</body>
+</html>

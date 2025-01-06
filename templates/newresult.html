@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .role-summary {
+            color: #555;
+            font-size: 1.2em;
+            margin-top: 10px;
+            text-align: left;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .role-summary p {
+            color: #333;
+            font-size: 1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            text-align: justify;
+        }    
+
+        .button {
+            width: 100%;
+            max-width: 600px;
+            padding: 5px;
+            margin: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .button:active {
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            transform: translateY(2px);
+        }
+
+        .description {
+            display: none;
+            text-align: left;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        ul.columns {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul.columns li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        ul.columns li::before {
+            content: '✖';
+            /*content: '✔';  Add a checkmark symbol */
+            margin-right: 10px;
+            color: #ec0c0c;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .go-home-btn, .download-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .go-home-btn:hover, .download-btn:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .go-home-btn:active, .download-btn:active {
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            transform: translateY(2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 15px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .button {
+                max-width: 100%;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .go-home-btn, .download-btn {
+                max-width: 100%;
+            }
+
+            .role-summary h3 {
+                font-size: 1.25em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="role-summary">
+    	<br>
+        Role Summary:
+        <p>{{summary}}</p>
+    </div>
+    <br>
+
+    {% for i,j,k,l,m in zip_list %}
+        <button id="button_{{m}}" class="button button1">
+            <h4>{{l}} - <span class="percentage">{{ i }}%</span> </h4>
+        </button>
+
+        <div id="description_button_{{m}}" class="description">
+            <h3>{{ j|length }} Skills missing in resume:</h3>
+            <ul class="columns" data-columns="3">
+                {% for a in j %}
+                    <li>{{a}}</li> <br>
+                {% endfor %}
+            </ul>
+            <br>
+        </div>
+    {% endfor %}
+
+<br><br>
+    <div class="button-container">
+        <form action="{{ url_for('downloadresult') }}" method="POST" enctype="multipart/form-data">
+            <button class="download-btn" type="submit">Download Results</button>
+        </form>
+        <a href="{{ url_for('home') }}">
+            <button class="go-home-btn">Go Home</button>
+        </a>
+    </div>
+    <br>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.button').each(function(){
+            var toggle_div_id = 'description_' + $(this).attr('id');
+            $(this).click(function(){
+                $('#' + toggle_div_id).toggle('hidden');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
